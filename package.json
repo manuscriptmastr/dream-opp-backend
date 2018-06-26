@@ -4,8 +4,8 @@
   "description": "Serving ReactJS and React Native clients everywhere. Made with Koa.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node --presets es2015,stage-2",
-    "build": "babel src -d dist --presets es2015,stage-2",
+    "start": "nodemon src/index.js --exec babel-node",
+    "build": "babel src -d dist",
     "serve": "node dist/index.js",
     "resetdb": "dropdb dream-opp; createdb dream-opp; psql -d dream-opp -f schema.sql; psql -d dream-opp -f data.sql;"
   },
