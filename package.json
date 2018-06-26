@@ -1,0 +1,11 @@
+{
+  "name": "dream-opp-backend",
+  "version": "1.0.0",
+  "description": "Serving ReactJS and React Native clients everywhere. Made with Koa.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
