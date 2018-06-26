@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "resetdb": "dropdb dream-opp; createdb dream-opp; psql -d dream-opp -f schema.sql; psql -d dream-opp -f data.sql;"
   },
   "author": "",
   "license": "ISC",
