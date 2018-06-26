@@ -1,2 +1,2 @@
 # DreamOpp Backend
-Serving ReactJS and React Native clients everywhere. Made with Koa.
+DreamOpp API serving ReactJS and React Native clients. Made with Koa.
