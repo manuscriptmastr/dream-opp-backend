@@ -9,5 +9,6 @@ let app = new Koa();
 
 app.use(bodyParser());
 app.use(api.routes());
+app.use(api.allowedMethods());
 
 app.listen(3000, () => console.log('Server started.'));
