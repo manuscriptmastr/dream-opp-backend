@@ -12,6 +12,7 @@ export const db = new Sequelize(
   {
     host: DB_HOST,
     dialect: 'postgres',
+    logging: false,
     define: {
       timestamps: false
     }
