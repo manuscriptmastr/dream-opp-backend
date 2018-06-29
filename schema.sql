@@ -6,6 +6,12 @@ CREATE TABLE users (
   last_name varchar(300)
 );
 
+CREATE TABLE opps (
+  id serial primary key,
+  title varchar(300),
+  description text
+);
+
 CREATE TABLE dreams (
   id serial primary key,
   user_id integer REFERENCES users
