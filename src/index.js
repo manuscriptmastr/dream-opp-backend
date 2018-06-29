@@ -1,5 +1,7 @@
 import dotenv from 'dotenv';
-dotenv.config({ path: '../.env' });
+dotenv.config();
+
+let { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
