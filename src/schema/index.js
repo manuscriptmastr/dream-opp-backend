@@ -1,6 +1,6 @@
 import { mergeSchemas } from 'graphql-tools';
 import userSchema from './user';
-// import oppSchema from './opp';
+import oppSchema from './opp';
 // import dreamSchema from './dream';
 // import roleSchema from './role';
 // import toolSchema from './tool';
@@ -9,7 +9,7 @@ import userSchema from './user';
 let schema = mergeSchemas({
   schemas: [
     userSchema,
-    // oppSchema,
+    oppSchema,
     // dreamSchema,
     // roleSchema,
     // toolSchema,

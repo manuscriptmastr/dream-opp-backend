@@ -33,7 +33,7 @@ type User {
 type Query {
   currentUser(email: String!): User
   user(id: ID!): User
-  allUsers: [User]
+  users(limit: Int): [User]
 }
 `;
 
@@ -41,7 +41,7 @@ let resolvers = {
   Query: {
     currentUser: (_, { email }) => User.findOne({ where: { email } }),
     user: (_, { id }) => User.findById(id),
-    allUsers: () => User.findAll()
+    users: (_, { limit = 30 }) => User.findAll({ limit })
   }
 };
 
