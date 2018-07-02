@@ -1,17 +1,31 @@
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+import { makeExecutableSchema } from 'graphql-tools';
+import Sequelize from 'sequelize';
+import db from '../db';
+
+let Dream = db.define('dreams', {
+  userId: {
+    type: Sequelize.INTEGER,
+    field: 'user_id'
+  }
+});
 
 let typeDefs = `
 type Dream {
   id: ID!
   userId: ID!
-  roles: [Role]
-  tools: [Tool]
-  teams: [Team]
+}
+
+type Query {
+  dream(userId: ID!): Dream
 }
 `;
 
-let schema = makeExecutableSchema({ typeDefs, resolvers });
+let resolvers = {
+  Query: {
+    dream: (_, { userId }) => Dream.findOne({ where: { userId } })
+  }
+};
 
-addMockFunctionsToSchema({ schema, preserveResolvers: true });
+let schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default schema;

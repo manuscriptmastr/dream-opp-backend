@@ -1,4 +1,17 @@
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+import { makeExecutableSchema } from 'graphql-tools';
+import Sequelize from 'sequelize';
+import db from '../db';
+
+let Opp = db.define('opps', {
+  title: {
+    type: Sequelize.STRING,
+    field: 'title'
+  },
+  description: {
+    type: Sequelize.STRING,
+    field: 'description'
+  }
+});
 
 let typeDefs = `
 type Opp {
@@ -6,10 +19,20 @@ type Opp {
   title: String
   description: String
 }
+
+type Query {
+  opp(id: ID!): Opp
+  opps(limit: Int): [Opp]
+}
 `;
 
-let schema = makeExecutableSchema({ typeDefs, resolvers });
+let resolvers = {
+  Query: {
+    opp: (_, { id }) => Opp.findById(id),
+    opps: (_, { limit = 30 }) => Opp.findAll({ limit })
+  }
+}
 
-addMockFunctionsToSchema({ schema, preserveResolvers: true });
+let schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default schema;

@@ -1,4 +1,21 @@
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+import { makeExecutableSchema } from 'graphql-tools';
+import Sequelize from 'sequelize';
+import db from '../db';
+
+let Team = db.define('teams', {
+  dreamId: {
+    type: Sequelize.INTEGER,
+    field: 'dream_id'
+  },
+  title: {
+    type: Sequelize.STRING,
+    field: 'title'
+  },
+  url: {
+    type: Sequelize.STRING,
+    field: 'url'
+  }
+});
 
 let typeDefs = `
 type Team {
@@ -7,10 +24,20 @@ type Team {
   title: String
   url: String!
 }
+
+type Query {
+  team(id: ID!): Team
+  teams(dreamId: ID!): [Team]
+}
 `;
 
-let schema = makeExecutableSchema({ typeDefs, resolvers });
+let resolvers = {
+  Query: {
+    team: (_, { id }) => Team.findById(id),
+    teams: (_, { dreamId }) => Team.findAll({ where: { dreamId } })
+  }
+};
 
-addMockFunctionsToSchema({ schema, preserveResolvers: true });
+let schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default schema;
