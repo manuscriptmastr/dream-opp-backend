@@ -2,7 +2,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 import Sequelize from 'sequelize';
 import db from '../db';
 
-let Opp = db.define('opps', {
+let Opp = db.define('opp', {
   title: {
     type: Sequelize.STRING,
     field: 'title'
