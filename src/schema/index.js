@@ -4,7 +4,7 @@ import oppSchema from './opp';
 import dreamSchema from './dream';
 import roleSchema from './role';
 import toolSchema from './tool';
-// import teamSchema from './team';
+import teamSchema from './team';
 
 let schema = mergeSchemas({
   schemas: [
@@ -13,7 +13,7 @@ let schema = mergeSchemas({
     dreamSchema,
     roleSchema,
     toolSchema,
-    // teamSchema
+    teamSchema
   ]
 });
 
