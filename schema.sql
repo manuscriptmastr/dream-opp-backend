@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE "user" (
   id serial primary key,
   username varchar(25) UNIQUE,
   email varchar(255) UNIQUE,
@@ -6,32 +6,32 @@ CREATE TABLE users (
   last_name varchar(300)
 );
 
-CREATE TABLE opps (
+CREATE TABLE "opp" (
   id serial primary key,
   title varchar(300),
   description text
 );
 
-CREATE TABLE dreams (
+CREATE TABLE "dream" (
   id serial primary key,
-  user_id integer REFERENCES users
+  user_id integer REFERENCES "user"
 );
 
-CREATE TABLE roles (
+CREATE TABLE "role" (
   id serial primary key,
-  dream_id integer REFERENCES dreams,
+  dream_id integer REFERENCES "dream",
   title varchar(300)
 );
 
-CREATE TABLE tools (
+CREATE TABLE "tool" (
   id serial primary key,
-  dream_id integer REFERENCES dreams,
+  dream_id integer REFERENCES "dream",
   title varchar(300)
 );
 
-CREATE TABLE teams (
+CREATE TABLE "team" (
   id serial primary key,
-  dream_id integer REFERENCES dreams,
+  dream_id integer REFERENCES "dream",
   title varchar(300),
   url text
 );

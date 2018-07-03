@@ -2,7 +2,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 import Sequelize from 'sequelize';
 import db from '../db';
 
-let User = db.define('users', {
+let User = db.define('user', {
   username: {
     type: Sequelize.STRING,
     field: 'username'

@@ -2,7 +2,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 import Sequelize from 'sequelize';
 import db from '../db';
 
-let Dream = db.define('dreams', {
+let Dream = db.define('dream', {
   userId: {
     type: Sequelize.INTEGER,
     field: 'user_id'
