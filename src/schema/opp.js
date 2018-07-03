@@ -3,6 +3,11 @@ import Sequelize from 'sequelize';
 import db from '../db';
 
 export let Opp = db.define('opp', {
+  id: {
+    type: Sequelize.UUID,
+    field: 'id',
+    primaryKey: true
+  },
   title: {
     type: Sequelize.STRING,
     field: 'title'

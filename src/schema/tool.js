@@ -3,8 +3,13 @@ import Sequelize from 'sequelize';
 import db from '../db';
 
 export let Tool = db.define('tool', {
+  id: {
+    type: Sequelize.UUID,
+    field: 'id',
+    primaryKey: true
+  },
   dreamId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.UUID,
     field: 'dream_id'
   },
   title: {

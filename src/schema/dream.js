@@ -3,8 +3,13 @@ import Sequelize from 'sequelize';
 import db from '../db';
 
 export let Dream = db.define('dream', {
+  id: {
+    type: Sequelize.UUID,
+    field: 'id',
+    primaryKey: true
+  },
   userId: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.UUID,
     field: 'user_id'
   }
 });
