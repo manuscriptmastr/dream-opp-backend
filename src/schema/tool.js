@@ -8,9 +8,9 @@ export let Tool = db.define('tool', {
     field: 'id',
     primaryKey: true
   },
-  dreamId: {
+  userId: {
     type: Sequelize.UUID,
-    field: 'dream_id'
+    field: 'user_id'
   },
   title: {
     type: Sequelize.STRING,
@@ -21,20 +21,20 @@ export let Tool = db.define('tool', {
 let typeDefs = `
 type Tool {
   id: ID!
-  dreamId: ID!
+  userId: ID!
   title: String!
 }
 
 type Query {
   tool(id: ID!): Tool
-  tools(dreamId: ID!): [Tool]
+  tools(userId: ID!): [Tool]
 }
 `;
 
 let resolvers = {
   Query: {
     tool: (_, { id }) => Tool.findById(id),
-    tools: (_, { dreamId }) => Tool.findAll({ where: { dreamId } })
+    tools: (_, { userId }) => Tool.findAll({ where: { userId } })
   }
 };
 

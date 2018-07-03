@@ -8,9 +8,9 @@ export let Role = db.define('role', {
     field: 'id',
     primaryKey: true
   },
-  dreamId: {
+  userId: {
     type: Sequelize.UUID,
-    field: 'dream_id'
+    field: 'user_id'
   },
   title: {
     type: Sequelize.STRING,
@@ -21,20 +21,20 @@ export let Role = db.define('role', {
 let typeDefs = `
 type Role {
   id: ID!
-  dreamId: ID!
+  userId: ID!
   title: String!
 }
 
 type Query {
   role(id: ID!): Role
-  roles(dreamId: ID!): [Role]
+  roles(userId: ID!): [Role]
 }
 `;
 
 let resolvers = {
   Query: {
     role: (_, { id }) => Role.findById(id),
-    roles: (_, { dreamId }) => Role.findAll({ where: { dreamId } })
+    roles: (_, { userId }) => Role.findAll({ where: { userId } })
   }
 };
 

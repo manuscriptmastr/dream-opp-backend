@@ -8,9 +8,9 @@ export let Team = db.define('team', {
     field: 'id',
     primaryKey: true
   },
-  dreamId: {
+  userId: {
     type: Sequelize.UUID,
-    field: 'dream_id'
+    field: 'user_id'
   },
   title: {
     type: Sequelize.STRING,
@@ -25,21 +25,21 @@ export let Team = db.define('team', {
 let typeDefs = `
 type Team {
   id: ID!
-  dreamId: ID!
+  userId: ID!
   title: String
   url: String!
 }
 
 type Query {
   team(id: ID!): Team
-  teams(dreamId: ID!): [Team]
+  teams(userId: ID!): [Team]
 }
 `;
 
 let resolvers = {
   Query: {
     team: (_, { id }) => Team.findById(id),
-    teams: (_, { dreamId }) => Team.findAll({ where: { dreamId } })
+    teams: (_, { userId }) => Team.findAll({ where: { userId } })
   }
 };
 
