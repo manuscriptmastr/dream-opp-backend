@@ -1,27 +1,9 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import Sequelize from 'sequelize';
-import db from '../db';
-
-export let Tool = db.define('tool', {
-  id: {
-    type: Sequelize.UUID,
-    field: 'id',
-    primaryKey: true
-  },
-  userId: {
-    type: Sequelize.UUID,
-    field: 'user_id'
-  },
-  title: {
-    type: Sequelize.STRING,
-    field: 'title'
-  }
-});
+import { Tool } from '../model';
 
 let typeDefs = `
 type Tool {
   id: ID!
-  userId: ID!
   title: String!
 }
 

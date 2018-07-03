@@ -1,30 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import Sequelize from 'sequelize';
-import db from '../db';
-
-export let User = db.define('user', {
-  id: {
-    type: Sequelize.UUID,
-    field: 'id',
-    primaryKey: true
-  },
-  username: {
-    type: Sequelize.STRING,
-    field: 'username'
-  },
-  email: {
-    type: Sequelize.STRING,
-    field: 'email'
-  },
-  firstName: {
-    type: Sequelize.STRING,
-    field: 'first_name'
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    field: 'last_name'
-  }
-});
+import { User } from '../model';
 
 let typeDefs = `
 type User {

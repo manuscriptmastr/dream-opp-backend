@@ -1,22 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import Sequelize from 'sequelize';
-import db from '../db';
-
-export let Opp = db.define('opp', {
-  id: {
-    type: Sequelize.UUID,
-    field: 'id',
-    primaryKey: true
-  },
-  title: {
-    type: Sequelize.STRING,
-    field: 'title'
-  },
-  description: {
-    type: Sequelize.STRING,
-    field: 'description'
-  }
-});
+import { Opp } from '../model';
 
 let typeDefs = `
 type Opp {
