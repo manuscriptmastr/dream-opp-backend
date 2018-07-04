@@ -14,6 +14,7 @@ export const db = new Sequelize(
     dialect: 'postgres',
     logging: false,
     define: {
+      underscored: true,
       timestamps: false,
       freezeTableName: true
     }

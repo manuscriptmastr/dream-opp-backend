@@ -5,9 +5,6 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import api from './api';
 
-import seed from './seed';
-seed();
-
 let app = new Koa();
 
 app.use(bodyParser());
