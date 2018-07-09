@@ -1,5 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import { Tool } from '../model';
+import { Tool } from '../db';
 
 let typeDefs = `
 type Tool {
@@ -9,14 +9,14 @@ type Tool {
 
 type Query {
   tool(id: ID!): Tool
-  tools(userId: ID!): [Tool]
+  tools: [Tool]
 }
 `;
 
 let resolvers = {
   Query: {
     tool: (_, { id }) => Tool.findById(id),
-    tools: (_, { userId }) => Tool.findAll({ where: { userId } })
+    tools: () => Tool.findAll()
   }
 };
 

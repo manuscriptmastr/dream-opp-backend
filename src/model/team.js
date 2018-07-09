@@ -1,21 +1,22 @@
-import Sequelize from 'sequelize';
-import db from '../db';
+export default (sequelize, { UUID, UUIDV4, STRING }) => {
+  let Model = sequelize.define('Team', {
+    id: {
+      type: UUID,
+      field: 'id',
+      primaryKey: true,
+      defaultValue: UUIDV4
+    },
+    title: {
+      type: STRING,
+      field: 'title'
+    },
+    url: {
+      type: STRING,
+      field: 'url'
+    }
+  });
 
-let model = db.define('team', {
-  id: {
-    type: Sequelize.UUID,
-    field: 'id',
-    primaryKey: true,
-    defaultValue: Sequelize.UUIDV4
-  },
-  title: {
-    type: Sequelize.STRING,
-    field: 'title'
-  },
-  url: {
-    type: Sequelize.STRING,
-    field: 'url'
-  }
-});
-
-export default model;
+  Model.associate = ({ User }) => {
+    Model.belongsTo(User);
+  };
+};

@@ -1,5 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import { Role } from '../model';
+import { Role } from '../db';
 
 let typeDefs = `
 type Role {
@@ -9,14 +9,14 @@ type Role {
 
 type Query {
   role(id: ID!): Role
-  roles(userId: ID!): [Role]
+  roles: [Role]
 }
 `;
 
 let resolvers = {
   Query: {
     role: (_, { id }) => Role.findById(id),
-    roles: (_, { userId }) => Role.findAll({ where: { userId } })
+    roles: () => Role.findAll()
   }
 };
 

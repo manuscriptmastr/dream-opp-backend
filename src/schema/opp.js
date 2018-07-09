@@ -1,5 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import { Opp } from '../model';
+import { Opp } from '../db';
 
 let typeDefs = `
 type Opp {

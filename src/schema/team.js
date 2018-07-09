@@ -1,5 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import { Team } from '../model';
+import { Team } from '../db';
 
 let typeDefs = `
 type Team {
@@ -10,14 +10,14 @@ type Team {
 
 type Query {
   team(id: ID!): Team
-  teams(userId: ID!): [Team]
+  teams: [Team]
 }
 `;
 
 let resolvers = {
   Query: {
     team: (_, { id }) => Team.findById(id),
-    teams: (_, { userId }) => Team.findAll({ where: { userId } })
+    teams: () => Team.findAll()
   }
 };
 

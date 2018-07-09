@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import Sequelize from 'sequelize';
+import Sequelize, { DataTypes } from 'sequelize';
+import * as models from './model';
 
 let { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
@@ -21,4 +22,8 @@ export const db = new Sequelize(
   },
 );
 
-export default db;
+Object.values(models).forEach((model) => model(db, DataTypes));
+
+db.sync();
+
+export let { User, Opp, Role, Tool, Team } = db.models;
