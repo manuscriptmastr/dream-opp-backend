@@ -24,6 +24,6 @@ export const db = new Sequelize(
 
 Object.values(models).forEach((model) => model(db, DataTypes));
 
-db.sync();
+db.sync({ force: true });
 
 export let { User, Opp, Role, Tool, Team } = db.models;
