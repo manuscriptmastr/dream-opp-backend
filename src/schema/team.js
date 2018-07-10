@@ -1,5 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import { Team } from '../db';
+import { Team } from '../model';
 
 let typeDefs = `
 type Team {

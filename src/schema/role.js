@@ -1,5 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import { Role } from '../db';
+import { Role } from '../model';
 
 let typeDefs = `
 type Role {
