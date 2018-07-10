@@ -1,6 +1,6 @@
 import { Team } from '../model';
 
-export let typeDefs = `
+let typeDefs = `
 type Team {
   id: ID!
   title: String
@@ -14,7 +14,7 @@ extend type Query {
 }
 `;
 
-export let resolvers = {
+let resolvers = {
   Team: {
     author: (team) => team.getUser()
   },
@@ -23,3 +23,5 @@ export let resolvers = {
     teams: () => Team.findAll()
   }
 };
+
+export default { typeDefs, resolvers };

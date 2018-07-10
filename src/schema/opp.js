@@ -1,6 +1,6 @@
 import { Opp } from '../model';
 
-export let typeDefs = `
+let typeDefs = `
 type Opp {
   id: ID!
   title: String
@@ -14,7 +14,7 @@ extend type Query {
 }
 `;
 
-export let resolvers = {
+let resolvers = {
   Opp: {
     author: (opp) => opp.getUser()
   },
@@ -23,3 +23,5 @@ export let resolvers = {
     opps: (_, { limit = 30 }) => Opp.findAll({ limit }),
   }
 }
+
+export default { typeDefs, resolvers };

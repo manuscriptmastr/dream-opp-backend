@@ -1,6 +1,6 @@
 import { Role } from '../model';
 
-export let typeDefs = `
+let typeDefs = `
 type Role {
   id: ID!
   title: String!
@@ -13,7 +13,7 @@ extend type Query {
 }
 `;
 
-export let resolvers = {
+let resolvers = {
   Role: {
     author: (role) => role.getUser()
   },
@@ -22,3 +22,5 @@ export let resolvers = {
     roles: () => Role.findAll()
   }
 };
+
+export default { typeDefs, resolvers };

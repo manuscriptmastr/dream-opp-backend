@@ -1,6 +1,6 @@
 import { User } from '../model';
 
-export let typeDefs = `
+let typeDefs = `
 type User {
   id: ID!
   username: String!
@@ -20,7 +20,7 @@ extend type Query {
 }
 `;
 
-export let resolvers = {
+let resolvers = {
   User: {
     opps: (user) => user.getOpps(),
     roles: (user) => user.getRoles(),
@@ -33,3 +33,5 @@ export let resolvers = {
     users: (_, { limit = 30 }) => User.findAll({ limit })
   }
 };
+
+export default { typeDefs, resolvers };

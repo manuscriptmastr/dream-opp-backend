@@ -1,6 +1,6 @@
 import { Tool } from '../model';
 
-export let typeDefs = `
+let typeDefs = `
 type Tool {
   id: ID!
   title: String!
@@ -13,7 +13,7 @@ extend type Query {
 }
 `;
 
-export let resolvers = {
+let resolvers = {
   Tool: {
     author: (tool) => tool.getUser()
   },
@@ -22,3 +22,5 @@ export let resolvers = {
     tools: () => Tool.findAll()
   }
 };
+
+export default { typeDefs, resolvers };
