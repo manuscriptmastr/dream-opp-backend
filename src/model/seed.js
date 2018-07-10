@@ -46,13 +46,15 @@ export default async ({ User, Opp, Role, Tool, Team }) => {
   await tool2.setUser(jon);
 
   let team1 = await Team.create({
-    title: 'Team 1'
+    title: 'Team 1',
+    url: 'https://google.com'
   });
   await team1.setUser(josh);
 
 
   let team2 = await Team.create({
-    title: 'Team 2'
+    title: 'Team 2',
+    url: 'https://facebook.com'
   });
   await team2.setUser(jon);
 };

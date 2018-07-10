@@ -1,25 +1,24 @@
-import { makeExecutableSchema } from 'graphql-tools';
 import { Tool } from '../model';
 
-let typeDefs = `
+export let typeDefs = `
 type Tool {
   id: ID!
   title: String!
+  author: User
 }
 
-type Query {
+extend type Query {
   tool(id: ID!): Tool
   tools: [Tool]
 }
 `;
 
-let resolvers = {
+export let resolvers = {
+  Tool: {
+    author: (tool) => tool.getUser()
+  },
   Query: {
     tool: (_, { id }) => Tool.findById(id),
     tools: () => Tool.findAll()
   }
 };
-
-let schema = makeExecutableSchema({ typeDefs, resolvers });
-
-export default schema;

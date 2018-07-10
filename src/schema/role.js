@@ -1,25 +1,24 @@
-import { makeExecutableSchema } from 'graphql-tools';
 import { Role } from '../model';
 
-let typeDefs = `
+export let typeDefs = `
 type Role {
   id: ID!
   title: String!
+  author: User
 }
 
-type Query {
+extend type Query {
   role(id: ID!): Role
   roles: [Role]
 }
 `;
 
-let resolvers = {
+export let resolvers = {
+  Role: {
+    author: (role) => role.getUser()
+  },
   Query: {
     role: (_, { id }) => Role.findById(id),
     roles: () => Role.findAll()
   }
 };
-
-let schema = makeExecutableSchema({ typeDefs, resolvers });
-
-export default schema;
