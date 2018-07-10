@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import db from '../db';
+import seed from './seed';
 import user from './user';
 import opp from './opp';
 import role from './role';
@@ -20,6 +21,6 @@ Object.values(models).forEach(model => {
   }
 });
 
-db.sync({ force: true });
+db.sync({ force: true }).then(() => seed(models));
 
 export let { User, Opp, Role, Tool, Team } = models;
