@@ -1,18 +1,23 @@
-import { mergeSchemas } from 'graphql-tools';
-import userSchema from './user';
-import oppSchema from './opp';
-import roleSchema from './role';
-import toolSchema from './tool';
-import teamSchema from './team';
+import { makeExecutableSchema } from 'graphql-tools';
+import { merge } from 'lodash';
+import base from './base';
+import user from './user';
+import opp from './opp';
+import role from './role';
+import tool from './tool';
+import team from './team';
 
-let schema = mergeSchemas({
-  schemas: [
-    userSchema,
-    oppSchema,
-    roleSchema,
-    toolSchema,
-    teamSchema
-  ]
-});
+let schemas = [
+  base,
+  user,
+  opp,
+  role,
+  tool,
+  team
+];
+
+let typeDefs = schemas.map(({ typeDefs: t }) => t);
+let resolvers = merge(...schemas.map(({ resolvers: r }) => r));
+let schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default schema;
