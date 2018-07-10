@@ -9,7 +9,10 @@ type Tool {
 
 extend type Query {
   tool(id: ID!): Tool
-  tools: [Tool]
+  tools(
+    limit: Int,
+    title: String
+  ): [Tool]
 }
 `;
 
@@ -19,7 +22,7 @@ let resolvers = {
   },
   Query: {
     tool: (_, { id }) => Tool.findById(id),
-    tools: () => Tool.findAll()
+    tools: (_, { limit, ...args }) => Tool.findAll({ where: { ...args }, limit })
   }
 };
 

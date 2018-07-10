@@ -16,7 +16,12 @@ type User {
 extend type Query {
   currentUser(email: String!): User
   user(id: ID!): User
-  users(limit: Int): [User]
+  users(
+    limit: Int,
+    username: String,
+    firstName: String,
+    lastName: String
+  ): [User]
 }
 `;
 
@@ -30,7 +35,7 @@ let resolvers = {
   Query: {
     currentUser: (_, { email }) => User.findOne({ where: { email } }),
     user: (_, { id }) => User.findById(id),
-    users: (_, { limit = 30 }) => User.findAll({ limit })
+    users: (_, { limit, ...args }) => User.findAll({ where: { ...args }, limit })
   }
 };
 

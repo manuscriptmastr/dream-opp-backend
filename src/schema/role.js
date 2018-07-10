@@ -9,7 +9,10 @@ type Role {
 
 extend type Query {
   role(id: ID!): Role
-  roles: [Role]
+  roles(
+    limit: Int,
+    title: String
+  ): [Role]
 }
 `;
 
@@ -19,7 +22,7 @@ let resolvers = {
   },
   Query: {
     role: (_, { id }) => Role.findById(id),
-    roles: () => Role.findAll()
+    roles: (_, { limit, ...args }) => Role.findAll({ where: { ...args }, limit })
   }
 };
 

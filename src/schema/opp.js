@@ -10,7 +10,10 @@ type Opp {
 
 extend type Query {
   opp(id: ID!): Opp
-  opps(limit: Int): [Opp]
+  opps(
+    limit: Int,
+    title: String
+  ): [Opp]
 }
 `;
 
@@ -20,7 +23,7 @@ let resolvers = {
   },
   Query: {
     opp: (_, { id }) => Opp.findById(id),
-    opps: (_, { limit = 30 }) => Opp.findAll({ limit })
+    opps: (_, { limit, ...args }) => Opp.findAll({ where: { ...args }, limit })
   }
 }
 

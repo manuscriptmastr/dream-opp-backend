@@ -10,7 +10,11 @@ type Team {
 
 extend type Query {
   team(id: ID!): Team
-  teams: [Team]
+  teams(
+    limit: Int,
+    title: String,
+    url: String
+  ): [Team]
 }
 `;
 
@@ -20,7 +24,7 @@ let resolvers = {
   },
   Query: {
     team: (_, { id }) => Team.findById(id),
-    teams: () => Team.findAll()
+    teams: (_, { limit, ...args }) => Team.findAll({ where: { ...args }, limit })
   }
 };
 
