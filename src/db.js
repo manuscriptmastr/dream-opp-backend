@@ -5,19 +5,20 @@ import Sequelize from 'sequelize';
 
 let { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-export const db = new Sequelize(
+const sequelize = new Sequelize(
   DB_NAME,
   DB_USER,
-  null,
+  DB_PASSWORD,
   {
     host: DB_HOST,
     dialect: 'postgres',
     logging: false,
     define: {
+      underscored: true,
       timestamps: false,
       freezeTableName: true
     }
   },
 );
 
-export default db;
+export default sequelize;
