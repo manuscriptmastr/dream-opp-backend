@@ -20,7 +20,7 @@ let resolvers = {
   },
   Query: {
     opp: (_, { id }) => Opp.findById(id),
-    opps: (_, { limit = 30 }) => Opp.findAll({ limit }),
+    opps: (_, { limit = 30 }) => Opp.findAll({ limit })
   }
 }
 
