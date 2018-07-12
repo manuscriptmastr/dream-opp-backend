@@ -1,5 +1,5 @@
 export default (sequelize, { UUID, UUIDV4, STRING }) => {
-  let Model = sequelize.define('Opp', {
+  let Opp = sequelize.define('Opp', {
     id: {
       type: UUID,
       field: 'id',
@@ -16,9 +16,9 @@ export default (sequelize, { UUID, UUIDV4, STRING }) => {
     }
   });
 
-  Model.associate = ({ User }) => {
-    Model.belongsTo(User);
+  Opp.associate = ({ User }) => {
+    Opp.belongsTo(User);
   };
 
-  return Model;
+  return Opp;
 };

@@ -1,5 +1,5 @@
 export default (sequelize, { UUID, UUIDV4, STRING }) => {
-  let Model = sequelize.define('Tool', {
+  let Tool = sequelize.define('Tool', {
     id: {
       type: UUID,
       field: 'id',
@@ -12,7 +12,9 @@ export default (sequelize, { UUID, UUIDV4, STRING }) => {
     }
   });
 
-  Model.associate = ({ User }) => {
-    Model.belongsTo(User);
+  Tool.associate = ({ User }) => {
+    Tool.belongsTo(User);
   };
+
+  return Tool;
 };

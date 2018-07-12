@@ -1,5 +1,5 @@
 export default (sequelize, { UUID, UUIDV4, STRING }) => {
-  let Model = sequelize.define('User', {
+  let User = sequelize.define('User', {
     id: {
       type: UUID,
       field: 'id',
@@ -24,12 +24,12 @@ export default (sequelize, { UUID, UUIDV4, STRING }) => {
     }
   });
   
-  Model.associate = ({ Opp, Role, Tool, Team }) => {
-    Model.hasMany(Opp);
-    Model.hasMany(Role);
-    Model.hasMany(Tool);
-    Model.hasMany(Team);
+  User.associate = ({ Opp, Role, Tool, Team }) => {
+    User.hasMany(Opp);
+    User.hasMany(Role);
+    User.hasMany(Tool);
+    User.hasMany(Team);
   };
-
-  return Model;
+  
+  return User;
 };

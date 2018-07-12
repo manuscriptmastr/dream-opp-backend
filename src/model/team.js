@@ -1,5 +1,5 @@
 export default (sequelize, { UUID, UUIDV4, STRING }) => {
-  let Model = sequelize.define('Team', {
+  let Team = sequelize.define('Team', {
     id: {
       type: UUID,
       field: 'id',
@@ -16,7 +16,9 @@ export default (sequelize, { UUID, UUIDV4, STRING }) => {
     }
   });
 
-  Model.associate = ({ User }) => {
-    Model.belongsTo(User);
+  Team.associate = ({ User }) => {
+    Team.belongsTo(User);
   };
+
+  return Team;
 };
