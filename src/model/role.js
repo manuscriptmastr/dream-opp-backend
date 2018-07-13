@@ -12,8 +12,9 @@ export default (sequelize, { UUID, UUIDV4, STRING }) => {
     }
   });
 
-  Role.associate = ({ User }) => {
+  Role.associate = ({ User, Opp }) => {
     Role.belongsTo(User);
+    Role.hasMany(Opp);
   };
 
   return Role;

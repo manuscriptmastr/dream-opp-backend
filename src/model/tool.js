@@ -12,8 +12,9 @@ export default (sequelize, { UUID, UUIDV4, STRING }) => {
     }
   });
 
-  Tool.associate = ({ User }) => {
+  Tool.associate = ({ User, Opp }) => {
     Tool.belongsTo(User);
+    Tool.belongsTo(Opp);
   };
 
   return Tool;

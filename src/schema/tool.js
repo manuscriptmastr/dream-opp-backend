@@ -5,6 +5,7 @@ type Tool {
   id: ID!
   title: String!
   author: User
+  opps: [Opp]
 }
 
 extend type Query {
@@ -18,7 +19,8 @@ extend type Query {
 
 let resolvers = {
   Tool: {
-    author: (tool) => tool.getUser()
+    author: (tool) => tool.getUser(),
+    opps: (tool) => tool.getOpps()
   },
   Query: {
     tool: (_, { id }) => Tool.findById(id),

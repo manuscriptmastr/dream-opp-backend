@@ -6,6 +6,7 @@ type Team {
   title: String
   url: String!
   author: User
+  opps: [Opp]
 }
 
 extend type Query {
@@ -20,7 +21,8 @@ extend type Query {
 
 let resolvers = {
   Team: {
-    author: (team) => team.getUser()
+    author: (team) => team.getUser(),
+    opps: (team) => team.getOpps()
   },
   Query: {
     team: (_, { id }) => Team.findById(id),

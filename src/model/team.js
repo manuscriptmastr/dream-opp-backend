@@ -16,8 +16,9 @@ export default (sequelize, { UUID, UUIDV4, STRING }) => {
     }
   });
 
-  Team.associate = ({ User }) => {
+  Team.associate = ({ User, Opp }) => {
     Team.belongsTo(User);
+    Team.hasMany(Opp);
   };
 
   return Team;
