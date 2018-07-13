@@ -1,5 +1,5 @@
 export default (sequelize, { UUID, UUIDV4, STRING }) => {
-  let Model = sequelize.define('Team', {
+  let Team = sequelize.define('Team', {
     id: {
       type: UUID,
       field: 'id',
@@ -13,10 +13,17 @@ export default (sequelize, { UUID, UUIDV4, STRING }) => {
     url: {
       type: STRING,
       field: 'url'
+    },
+    imgUrl: {
+      type: STRING,
+      field: 'img_url'
     }
   });
 
-  Model.associate = ({ User }) => {
-    Model.belongsTo(User);
+  Team.associate = ({ User, Opp }) => {
+    Team.belongsTo(User);
+    Team.hasMany(Opp);
   };
+
+  return Team;
 };

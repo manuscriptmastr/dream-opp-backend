@@ -3,23 +3,29 @@ import { Opp } from '../model';
 let typeDefs = `
 type Opp {
   id: ID!
-  title: String
   description: String
   author: User
+  bookmarked: Boolean!
+  role: Role
+  tools: [Tool]
+  team: Team
 }
 
 extend type Query {
   opp(id: ID!): Opp
   opps(
     limit: Int,
-    title: String
+    bookmarked: Boolean
   ): [Opp]
 }
 `;
 
 let resolvers = {
   Opp: {
-    author: (opp) => opp.getUser()
+    author: (opp) => opp.getUser(),
+    role: (opp) => opp.getRole(),
+    tools: (opp) => opp.getTools(),
+    team: (opp) => opp.getTeam()
   },
   Query: {
     opp: (_, { id }) => Opp.findById(id),

@@ -5,6 +5,7 @@ type Role {
   id: ID!
   title: String!
   author: User
+  opps: [Opp]
 }
 
 extend type Query {
@@ -18,7 +19,8 @@ extend type Query {
 
 let resolvers = {
   Role: {
-    author: (role) => role.getUser()
+    author: (role) => role.getUser(),
+    opps: (role) => role.getOpps(),
   },
   Query: {
     role: (_, { id }) => Role.findById(id),
