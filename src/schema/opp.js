@@ -3,9 +3,9 @@ import { Opp } from '../model';
 let typeDefs = `
 type Opp {
   id: ID!
-  title: String
   description: String
   author: User
+  bookmarked: Boolean!
   role: Role
   tools: [Tool]
   team: Team
@@ -15,7 +15,7 @@ extend type Query {
   opp(id: ID!): Opp
   opps(
     limit: Int,
-    title: String
+    bookmarked: Boolean
   ): [Opp]
 }
 `;

@@ -5,6 +5,7 @@ type Team {
   id: ID!
   title: String
   url: String!
+  imgUrl: String
   author: User
   opps: [Opp]
 }

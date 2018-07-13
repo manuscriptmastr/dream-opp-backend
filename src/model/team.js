@@ -13,6 +13,10 @@ export default (sequelize, { UUID, UUIDV4, STRING }) => {
     url: {
       type: STRING,
       field: 'url'
+    },
+    imgUrl: {
+      type: STRING,
+      field: 'img_url'
     }
   });
 
