@@ -8,12 +8,20 @@ type Role {
   opps: [Opp]
 }
 
+input RoleInput {
+  title: String!
+}
+
 extend type Query {
   role(id: ID!): Role
   roles(
-    limit: Int,
-    title: String
+    input: RoleInput,
+    limit: Int
   ): [Role]
+}
+
+extend type Mutation {
+  createRole(input: RoleInput!): Role
 }
 `;
 
@@ -24,7 +32,10 @@ let resolvers = {
   },
   Query: {
     role: (_, { id }) => Role.findById(id),
-    roles: (_, { limit, ...args }) => Role.findAll({ where: { ...args }, limit })
+    roles: (_, { input, limit }) => Role.findAll({ where: input, limit })
+  },
+  Mutation: {
+    createRole: (_, { input }) => Role.create(input)
   }
 };
 
