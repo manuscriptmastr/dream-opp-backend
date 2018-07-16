@@ -19,7 +19,7 @@ input TeamInput {
 extend type Query {
   team(id: ID!): Team
   teams(
-    input: TeamInput!,
+    input: TeamInput,
     limit: Int
   ): [Team]
 }

@@ -15,7 +15,7 @@ input ToolInput {
 extend type Query {
   tool(id: ID!): Tool
   tools(
-    input: ToolInput!,
+    input: ToolInput,
     limit: Int
   ): [Tool]
 }

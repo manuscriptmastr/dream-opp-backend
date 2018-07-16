@@ -13,14 +13,19 @@ type User {
   teams: [Team]
 }
 
+input UserInput {
+  username: String!
+  email: String!
+  firstName: String
+  lastName: String
+}
+
 extend type Query {
   currentUser(email: String!): User
   user(id: ID!): User
   users(
-    limit: Int,
-    username: String,
-    firstName: String,
-    lastName: String
+    input: UserInput,
+    limit: Int
   ): [User]
 }
 `;
@@ -35,7 +40,7 @@ let resolvers = {
   Query: {
     currentUser: (_, { email }) => User.findOne({ where: { email } }),
     user: (_, { id }) => User.findById(id),
-    users: (_, { limit, ...args }) => User.findAll({ where: { ...args }, limit })
+    users: (_, { input, limit }) => User.findAll({ where: input, limit })
   }
 };
 

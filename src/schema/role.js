@@ -15,7 +15,7 @@ input RoleInput {
 extend type Query {
   role(id: ID!): Role
   roles(
-    input: RoleInput!,
+    input: RoleInput,
     limit: Int
   ): [Role]
 }

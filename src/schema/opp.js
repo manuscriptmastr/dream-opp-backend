@@ -11,11 +11,15 @@ type Opp {
   team: Team
 }
 
+input OppInput {
+  bookmarked: Boolean!
+}
+
 extend type Query {
   opp(id: ID!): Opp
   opps(
-    limit: Int,
-    bookmarked: Boolean
+    input: OppInput,
+    limit: Int
   ): [Opp]
 }
 `;
@@ -29,7 +33,7 @@ let resolvers = {
   },
   Query: {
     opp: (_, { id }) => Opp.findById(id),
-    opps: (_, { limit, ...args }) => Opp.findAll({ where: { ...args }, limit })
+    opps: (_, { input, limit }) => Opp.findAll({ where: input, limit })
   }
 }
 
