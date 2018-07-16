@@ -8,11 +8,15 @@ type Tool {
   opps: [Opp]
 }
 
+input ToolInput {
+  title: String!
+}
+
 extend type Query {
   tool(id: ID!): Tool
   tools(
-    limit: Int,
-    title: String
+    input: ToolInput!,
+    limit: Int
   ): [Tool]
 }
 `;
@@ -24,7 +28,7 @@ let resolvers = {
   },
   Query: {
     tool: (_, { id }) => Tool.findById(id),
-    tools: (_, { limit, ...args }) => Tool.findAll({ where: { ...args }, limit })
+    tools: (_, { input, limit }) => Tool.findAll({ where: input, limit })
   }
 };
 

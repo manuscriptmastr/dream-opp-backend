@@ -3,19 +3,24 @@ import { Team } from '../model';
 let typeDefs = `
 type Team {
   id: ID!
-  title: String
+  title: String!
   url: String!
   imgUrl: String
   author: User
   opps: [Opp]
 }
 
+input TeamInput {
+  title: String!
+  url: String!
+  imgUrl: String
+}
+
 extend type Query {
   team(id: ID!): Team
   teams(
-    limit: Int,
-    title: String,
-    url: String
+    input: TeamInput!,
+    limit: Int
   ): [Team]
 }
 `;
@@ -27,7 +32,7 @@ let resolvers = {
   },
   Query: {
     team: (_, { id }) => Team.findById(id),
-    teams: (_, { limit, ...args }) => Team.findAll({ where: { ...args }, limit })
+    teams: (_, { input, limit }) => Team.findAll({ where: input, limit })
   }
 };
 
