@@ -41,7 +41,7 @@ let resolvers = {
     updateRole: (_, { input, id }) => Role.findById(id)
       .then(role => role.update(input)),
     destroyRole: (_, { id }) => Role.findById(id)
-      .then(role => { role.destroy(); return role; })
+      .then(role => role.destroy().then(() => role))
   }
 };
 
