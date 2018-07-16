@@ -22,6 +22,8 @@ extend type Query {
 
 extend type Mutation {
   createRole(input: RoleInput!): Role
+  updateRole(input: RoleInput!, id: ID!): Role
+  destroyRole(id: ID!): Role
 }
 `;
 
@@ -35,7 +37,11 @@ let resolvers = {
     roles: (_, { input, limit }) => Role.findAll({ where: input, limit })
   },
   Mutation: {
-    createRole: (_, { input }) => Role.create(input)
+    createRole: (_, { input }) => Role.create(input),
+    updateRole: (_, { input, id }) => Role.findById(id)
+      .then(role => role.update(input)),
+    destroyRole: (_, { id }) => Role.findById(id)
+      .then(role => { role.destroy(); return role; })
   }
 };
 
