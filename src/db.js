@@ -14,8 +14,8 @@ const sequelize = new Sequelize(
     dialect: 'postgres',
     logging: false,
     define: {
+      paranoid: true,
       underscored: true,
-      timestamps: false,
       freezeTableName: true
     }
   },

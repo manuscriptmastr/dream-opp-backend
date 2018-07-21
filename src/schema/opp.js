@@ -27,9 +27,9 @@ extend type Query {
 let resolvers = {
   Opp: {
     author: (opp) => opp.getUser(),
-    role: (opp) => opp.getRole(),
-    tools: (opp) => opp.getTools(),
-    team: (opp) => opp.getTeam()
+    role: (opp) => opp.getRole({ paranoid: false }),
+    tools: (opp) => opp.getTools({ paranoid: false }),
+    team: (opp) => opp.getTeam({ paranoid: false })
   },
   Query: {
     opp: (_, { id }) => Opp.findById(id),
