@@ -13,7 +13,6 @@ type Team {
 input TeamInput {
   title: String!
   url: String!
-  imgUrl: String
 }
 
 extend type Query {
@@ -22,6 +21,12 @@ extend type Query {
     input: TeamInput,
     limit: Int
   ): [Team]
+}
+
+extend type Mutation {
+  createTeam(input: TeamInput!): Team
+  updateTeam(input: TeamInput!, id: ID!): Team
+  destroyTeam(id: ID!): Team
 }
 `;
 
@@ -33,6 +38,13 @@ let resolvers = {
   Query: {
     team: (_, { id }) => Team.findById(id),
     teams: (_, { input, limit }) => Team.findAll({ where: input, limit })
+  },
+  Mutation: {
+    createTeam: (_, { input }) => Team.create(input),
+    updateTeam: (_, { input, id }) => Team.findById(id)
+      .then(team => team.update(input)),
+    destroyTeam: (_, { id }) => Team.findById(id)
+      .then(team => team.destroy().then(() => team))
   }
 };
 
