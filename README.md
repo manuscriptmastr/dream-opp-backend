@@ -1,9 +1,9 @@
 # DreamOpp Backend
-DreamOpp API serving ReactJS and React Native clients.
+API serving DreamOpp clients. [See the React Native application](https://github.com/manuscriptmastr/dream-opp).
 
-## Tech
+## DreamStack
 - Koa
 - PostgreSQL
 - Sequelize
 - GraphQL
-- Apollo
+- Apollo Server
