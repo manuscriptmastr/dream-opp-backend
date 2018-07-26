@@ -19,6 +19,12 @@ extend type Query {
     limit: Int
   ): [Tool]
 }
+
+extend type Mutation {
+  createTool(input: ToolInput!): Tool
+  updateTool(input: ToolInput!, id: ID!): Tool
+  destroyTool(id: ID!): Tool
+}
 `;
 
 let resolvers = {
@@ -29,6 +35,13 @@ let resolvers = {
   Query: {
     tool: (_, { id }) => Tool.findById(id),
     tools: (_, { input, limit }) => Tool.findAll({ where: input, limit })
+  },
+  Mutation: {
+    createTool: (_, { input }) => Tool.create(input),
+    updateTool: (_, { input, id }) => Tool.findById(id)
+      .then(tool => tool.update(input)),
+    destroyTool: (_, { id }) => Tool.findById(id)
+      .then(tool => tool.destroy().then(() => tool))
   }
 };
 
