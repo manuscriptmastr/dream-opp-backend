@@ -1,4 +1,5 @@
 import { User } from '../model';
+import { createToken } from '../library/authentication';
 
 let typeDefs = `
 type User {
@@ -11,6 +12,7 @@ type User {
   roles: [Role]
   tools: [Tool]
   teams: [Team]
+  token: String!
 }
 
 input UserInput {
@@ -28,6 +30,10 @@ extend type Query {
     limit: Int
   ): [User]
 }
+
+extend type Mutation {
+  createUser(input: UserInput!): User
+}
 `;
 
 let resolvers = {
@@ -35,12 +41,16 @@ let resolvers = {
     opps: (user) => user.getOpps(),
     roles: (user) => user.getRoles(),
     tools: (user) => user.getTools(),
-    teams: (user) => user.getTeams()
+    teams: (user) => user.getTeams(),
+    token: (user) => createToken(user.id)
   },
   Query: {
     currentUser: (_, { email }) => User.findOne({ where: { email } }),
     user: (_, { id }) => User.findById(id),
     users: (_, { input, limit }) => User.findAll({ where: input, limit })
+  },
+  Mutation: {
+    createUser: (_, { input }) => User.create(input)
   }
 };
 
