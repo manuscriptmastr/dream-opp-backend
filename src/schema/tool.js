@@ -13,17 +13,17 @@ input ToolInput {
 }
 
 extend type Query {
-  tool(id: ID!): Tool
+  tool(id: ID!): Tool @isAuthenticated
   tools(
     input: ToolInput,
     limit: Int
-  ): [Tool]
+  ): [Tool] @isAuthenticated
 }
 
 extend type Mutation {
-  createTool(input: ToolInput!): Tool
-  updateTool(input: ToolInput!, id: ID!): Tool
-  destroyTool(id: ID!): Tool
+  createTool(input: ToolInput!): Tool @isAuthenticated
+  updateTool(input: ToolInput!, id: ID!): Tool @isAuthenticated
+  destroyTool(id: ID!): Tool @isAuthenticated
 }
 `;
 

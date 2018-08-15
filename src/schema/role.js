@@ -13,17 +13,17 @@ input RoleInput {
 }
 
 extend type Query {
-  role(id: ID!): Role
+  role(id: ID!): Role @isAuthenticated
   roles(
     input: RoleInput,
     limit: Int
-  ): [Role]
+  ): [Role] @isAuthenticated
 }
 
 extend type Mutation {
-  createRole(input: RoleInput!): Role
-  updateRole(input: RoleInput!, id: ID!): Role
-  destroyRole(id: ID!): Role
+  createRole(input: RoleInput!): Role @isAuthenticated
+  updateRole(input: RoleInput!, id: ID!): Role @isAuthenticated
+  destroyRole(id: ID!): Role @isAuthenticated
 }
 `;
 

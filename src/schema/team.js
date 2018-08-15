@@ -16,17 +16,17 @@ input TeamInput {
 }
 
 extend type Query {
-  team(id: ID!): Team
+  team(id: ID!): Team @isAuthenticated
   teams(
     input: TeamInput,
     limit: Int
-  ): [Team]
+  ): [Team] @isAuthenticated
 }
 
 extend type Mutation {
-  createTeam(input: TeamInput!): Team
-  updateTeam(input: TeamInput!, id: ID!): Team
-  destroyTeam(id: ID!): Team
+  createTeam(input: TeamInput!): Team @isAuthenticated
+  updateTeam(input: TeamInput!, id: ID!): Team @isAuthenticated
+  destroyTeam(id: ID!): Team @isAuthenticated
 }
 `;
 

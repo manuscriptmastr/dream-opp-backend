@@ -16,11 +16,11 @@ input OppInput {
 }
 
 extend type Query {
-  opp(id: ID!): Opp
+  opp(id: ID!): Opp @isAuthenticated
   opps(
     input: OppInput,
     limit: Int
-  ): [Opp]
+  ): [Opp] @isAuthenticated
 }
 `;
 

@@ -6,10 +6,11 @@ import opp from './opp';
 import role from './role';
 import tool from './tool';
 import team from './team';
-import directive from './directive';
+import directive, { directiveResolvers } from './directive';
 
 let schemas = [
   base,
+  directive,
   user,
   opp,
   role,
@@ -22,7 +23,7 @@ let resolvers = merge(...schemas.map(({ resolvers: r }) => r));
 let schema = makeExecutableSchema({
   typeDefs,
   resolvers,
-  directiveResolvers: directive.resolvers
+  directiveResolvers
 });
 
 export default schema;
