@@ -1,3 +1,5 @@
+import { createToken } from "../lib/auth";
+
 export default (sequelize, { UUID, UUIDV4, STRING }) => {
   let User = sequelize.define('User', {
     id: {
@@ -23,6 +25,10 @@ export default (sequelize, { UUID, UUIDV4, STRING }) => {
       field: 'last_name'
     }
   });
+
+  User.prototype.getToken = function () {
+    return createToken(this.id);
+  }
   
   User.associate = ({ Opp, Role, Tool, Team }) => {
     User.hasMany(Opp);
