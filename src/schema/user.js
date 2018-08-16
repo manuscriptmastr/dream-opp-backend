@@ -21,12 +21,17 @@ input UserInput {
   lastName: String
 }
 
+input LoginInput {
+  email: String!
+}
+
 extend type Query {
-  currentUser(email: String!): User
+  currentUser: User
 }
 
 extend type Mutation {
   createUser(input: UserInput!): User
+  loginUser(input: LoginInput!): User
 }
 `;
 
@@ -39,14 +44,12 @@ let resolvers = {
     token: (user) => user.getToken()
   },
   Query: {
-    currentUser: (_, { email }, { userId }) =>
-      email ?
-      User.findOne({ where: { email } })
-        :
-      User.findById(userId)
+    currentUser: (_, __, { user: { userId } }) => User.findById(userId)
   },
   Mutation: {
-    createUser: (_, { input }) => User.create(input)
+    createUser: (_, { input }) => User.create(input),
+    loginUser: (_, { input: { email } }) =>
+      User.findOne({ where: { email } })
   }
 };
 

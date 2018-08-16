@@ -3,9 +3,7 @@ directive @isAuthenticated on FIELD
 `;
 
 export let directiveResolvers = {
-  isAuthenticated: (next, parent, args, { user }) => {
-    console.log('Authenticating...')
-    console.log(user)
+  isAuthenticated: (next, _, __, { user }) => {
     if (user) {
       return next();
     }
