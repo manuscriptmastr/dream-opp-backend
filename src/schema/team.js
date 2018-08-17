@@ -35,7 +35,8 @@ let resolvers = {
     team: (_, { id }) => Team.findById(id)
   },
   Mutation: {
-    createTeam: (_, { input }) => Team.create(input),
+    createTeam: (_, { input }, { user }) => Team.create(input)
+      .then(team => team.setUser(user)),
     updateTeam: (_, { input, id }) => Team.findById(id)
       .then(team => team.update(input)),
     destroyTeam: (_, { id }) => Team.findById(id)

@@ -32,7 +32,8 @@ let resolvers = {
     tool: (_, { id }) => Tool.findById(id)
   },
   Mutation: {
-    createTool: (_, { input }) => Tool.create(input),
+    createTool: (_, { input }, { user }) => Tool.create(input)
+      .then(tool => tool.setUser(user)),
     updateTool: (_, { input, id }) => Tool.findById(id)
       .then(tool => tool.update(input)),
     destroyTool: (_, { id }) => Tool.findById(id)

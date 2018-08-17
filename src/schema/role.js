@@ -32,7 +32,8 @@ let resolvers = {
     role: (_, { id }) => Role.findById(id)
   },
   Mutation: {
-    createRole: (_, { input }) => Role.create(input),
+    createRole: (_, { input }, { user }) => Role.create(input)
+      .then(role => role.setUser(user)),
     updateRole: (_, { input, id }) => Role.findById(id)
       .then(role => role.update(input)),
     destroyRole: (_, { id }) => Role.findById(id)
