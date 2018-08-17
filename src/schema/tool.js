@@ -13,17 +13,13 @@ input ToolInput {
 }
 
 extend type Query {
-  tool(id: ID!): Tool
-  tools(
-    input: ToolInput,
-    limit: Int
-  ): [Tool]
+  tool(id: ID!): Tool @isAuthenticated
 }
 
 extend type Mutation {
-  createTool(input: ToolInput!): Tool
-  updateTool(input: ToolInput!, id: ID!): Tool
-  destroyTool(id: ID!): Tool
+  createTool(input: ToolInput!): Tool @isAuthenticated
+  updateTool(input: ToolInput!, id: ID!): Tool @isAuthenticated
+  destroyTool(id: ID!): Tool @isAuthenticated
 }
 `;
 
@@ -33,11 +29,11 @@ let resolvers = {
     opps: (tool) => tool.getOpps()
   },
   Query: {
-    tool: (_, { id }) => Tool.findById(id),
-    tools: (_, { input, limit }) => Tool.findAll({ where: input, limit })
+    tool: (_, { id }) => Tool.findById(id)
   },
   Mutation: {
-    createTool: (_, { input }) => Tool.create(input),
+    createTool: (_, { input }, { user }) => Tool.create(input)
+      .then(tool => tool.setUser(user)),
     updateTool: (_, { input, id }) => Tool.findById(id)
       .then(tool => tool.update(input)),
     destroyTool: (_, { id }) => Tool.findById(id)

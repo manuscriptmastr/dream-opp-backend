@@ -16,17 +16,13 @@ input TeamInput {
 }
 
 extend type Query {
-  team(id: ID!): Team
-  teams(
-    input: TeamInput,
-    limit: Int
-  ): [Team]
+  team(id: ID!): Team @isAuthenticated
 }
 
 extend type Mutation {
-  createTeam(input: TeamInput!): Team
-  updateTeam(input: TeamInput!, id: ID!): Team
-  destroyTeam(id: ID!): Team
+  createTeam(input: TeamInput!): Team @isAuthenticated
+  updateTeam(input: TeamInput!, id: ID!): Team @isAuthenticated
+  destroyTeam(id: ID!): Team @isAuthenticated
 }
 `;
 
@@ -36,11 +32,11 @@ let resolvers = {
     opps: (team) => team.getOpps()
   },
   Query: {
-    team: (_, { id }) => Team.findById(id),
-    teams: (_, { input, limit }) => Team.findAll({ where: input, limit })
+    team: (_, { id }) => Team.findById(id)
   },
   Mutation: {
-    createTeam: (_, { input }) => Team.create(input),
+    createTeam: (_, { input }, { user }) => Team.create(input)
+      .then(team => team.setUser(user)),
     updateTeam: (_, { input, id }) => Team.findById(id)
       .then(team => team.update(input)),
     destroyTeam: (_, { id }) => Team.findById(id)

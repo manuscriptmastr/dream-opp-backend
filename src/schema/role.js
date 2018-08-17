@@ -13,17 +13,13 @@ input RoleInput {
 }
 
 extend type Query {
-  role(id: ID!): Role
-  roles(
-    input: RoleInput,
-    limit: Int
-  ): [Role]
+  role(id: ID!): Role @isAuthenticated
 }
 
 extend type Mutation {
-  createRole(input: RoleInput!): Role
-  updateRole(input: RoleInput!, id: ID!): Role
-  destroyRole(id: ID!): Role
+  createRole(input: RoleInput!): Role @isAuthenticated
+  updateRole(input: RoleInput!, id: ID!): Role @isAuthenticated
+  destroyRole(id: ID!): Role @isAuthenticated
 }
 `;
 
@@ -33,11 +29,11 @@ let resolvers = {
     opps: (role) => role.getOpps(),
   },
   Query: {
-    role: (_, { id }) => Role.findById(id),
-    roles: (_, { input, limit }) => Role.findAll({ where: input, limit })
+    role: (_, { id }) => Role.findById(id)
   },
   Mutation: {
-    createRole: (_, { input }) => Role.create(input),
+    createRole: (_, { input }, { user }) => Role.create(input)
+      .then(role => role.setUser(user)),
     updateRole: (_, { input, id }) => Role.findById(id)
       .then(role => role.update(input)),
     destroyRole: (_, { id }) => Role.findById(id)
