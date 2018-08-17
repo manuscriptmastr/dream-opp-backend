@@ -26,7 +26,7 @@ input LoginInput {
 }
 
 extend type Query {
-  currentUser: User
+  currentUser: User @isAuthenticated
 }
 
 extend type Mutation {
