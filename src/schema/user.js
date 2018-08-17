@@ -17,12 +17,14 @@ type User {
 input UserInput {
   username: String!
   email: String!
+  password: String!
   firstName: String
   lastName: String
 }
 
 input LoginInput {
   email: String!
+  password: String!
 }
 
 extend type Query {
@@ -48,8 +50,9 @@ let resolvers = {
   },
   Mutation: {
     createUser: (_, { input }) => User.create(input),
-    loginUser: (_, { input: { email } }) =>
+    loginUser: (_, { input: { email, password } }) =>
       User.findOne({ where: { email } })
+        .then(user => user ? user.verifyPassword(password): null)
   }
 };
 

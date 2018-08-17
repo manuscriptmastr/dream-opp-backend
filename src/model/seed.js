@@ -1,7 +1,9 @@
 export default async ({ User, Opp, Role, Tool, Team }) => {
+  
   let josh = await User.create({
     username: 'manuscriptmaster',
     email: 'josh@email.com',
+    password: '12345',
     firstName: 'Joshua',
     lastName: 'Martin'
   });
@@ -9,6 +11,7 @@ export default async ({ User, Opp, Role, Tool, Team }) => {
   let jon = await User.create({
     username: 'nybblr',
     email: 'jon@email.com',
+    password: 'abcdefg',
     firstName: 'Jonathan',
     lastName: 'Martin'
   });
