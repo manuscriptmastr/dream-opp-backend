@@ -17,10 +17,6 @@ input TeamInput {
 
 extend type Query {
   team(id: ID!): Team @isAuthenticated
-  teams(
-    input: TeamInput,
-    limit: Int
-  ): [Team] @isAuthenticated
 }
 
 extend type Mutation {
@@ -36,8 +32,7 @@ let resolvers = {
     opps: (team) => team.getOpps()
   },
   Query: {
-    team: (_, { id }) => Team.findById(id),
-    teams: (_, { input, limit }) => Team.findAll({ where: input, limit })
+    team: (_, { id }) => Team.findById(id)
   },
   Mutation: {
     createTeam: (_, { input }) => Team.create(input),

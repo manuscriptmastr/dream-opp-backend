@@ -14,10 +14,6 @@ input ToolInput {
 
 extend type Query {
   tool(id: ID!): Tool @isAuthenticated
-  tools(
-    input: ToolInput,
-    limit: Int
-  ): [Tool] @isAuthenticated
 }
 
 extend type Mutation {
@@ -33,8 +29,7 @@ let resolvers = {
     opps: (tool) => tool.getOpps()
   },
   Query: {
-    tool: (_, { id }) => Tool.findById(id),
-    tools: (_, { input, limit }) => Tool.findAll({ where: input, limit })
+    tool: (_, { id }) => Tool.findById(id)
   },
   Mutation: {
     createTool: (_, { input }) => Tool.create(input),

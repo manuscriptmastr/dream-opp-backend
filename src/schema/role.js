@@ -14,10 +14,6 @@ input RoleInput {
 
 extend type Query {
   role(id: ID!): Role @isAuthenticated
-  roles(
-    input: RoleInput,
-    limit: Int
-  ): [Role] @isAuthenticated
 }
 
 extend type Mutation {
@@ -33,8 +29,7 @@ let resolvers = {
     opps: (role) => role.getOpps(),
   },
   Query: {
-    role: (_, { id }) => Role.findById(id),
-    roles: (_, { input, limit }) => Role.findAll({ where: input, limit })
+    role: (_, { id }) => Role.findById(id)
   },
   Mutation: {
     createRole: (_, { input }) => Role.create(input),

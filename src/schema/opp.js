@@ -17,10 +17,6 @@ input OppInput {
 
 extend type Query {
   opp(id: ID!): Opp @isAuthenticated
-  opps(
-    input: OppInput,
-    limit: Int
-  ): [Opp] @isAuthenticated
 }
 `;
 
@@ -32,8 +28,7 @@ let resolvers = {
     team: (opp) => opp.getTeam({ paranoid: false })
   },
   Query: {
-    opp: (_, { id }) => Opp.findById(id),
-    opps: (_, { input, limit }) => Opp.findAll({ where: input, limit })
+    opp: (_, { id }) => Opp.findById(id)
   }
 }
 
