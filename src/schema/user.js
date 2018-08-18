@@ -46,7 +46,7 @@ let resolvers = {
     token: (user) => user.getToken()
   },
   Query: {
-    currentUser: (_, __, { user: { id } }) => User.findById(id)
+    currentUser: (_, __, { user }) => user
   },
   Mutation: {
     createUser: (_, { input }) => User.create(input),
